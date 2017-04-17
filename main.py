@@ -26,11 +26,30 @@ gmailMentions = callData['callerWords'][callData['callerWords'].str.contains("gm
 
 d.parse(callData['callerWords'][1155])
 
+emailFound = 0
 for ind, val in gmailMentions.iteritems():
   print(ind)
   # callData['callerWords'][ind]
-  print(d.parse(callData['callerWords'][ind]))
+  #print(d.parse(callData['callerWords'][ind]))
+  entryFound = False
+  for entry in d.parse(callData['callerWords'][ind]):
+    if 'dim' in entry and entry['dim'] == 'email':
+      #print(entry)
+      entryFound = True
+  if entryFound == False:
+    print("No email address found")
+  else: 
+    emailFound += 1
 
-d.parse(callData['callerWords'][384][140:160])
+print("Number of calls with emails found: " + str(emailFound))
+
+# 5673
+  
+#for ind, val in temp.iteritems():
+#  print(ind)
+#  # callData['callerWords'][ind]
+#  print(d.parse(callData['callerWords'][ind]))
+#  
+#d.parse(callData['callerWords'][384][140:160])
 
 
